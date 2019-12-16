@@ -2,7 +2,8 @@ class Oystercard
 
     attr_reader :balance
 
-    LIMIT = 90
+    MAX_LIMIT = 90
+    MIN_LIMIT = 1
 
     def initialize(balance = 0)
         @balance = balance
@@ -10,7 +11,7 @@ class Oystercard
     end
 
     def top_up(value)
-        fail "Error: Maximum limit of #{LIMIT.to_s} reached" if exceeds_max?(value)
+        fail "Error: Maximum limit of #{MAX_LIMIT.to_s} reached" if exceeds_max?(value)
         @balance += value
     end
 
@@ -23,6 +24,7 @@ class Oystercard
     end
 
     def touch_in
+      fail "Not enough credit" if min_amount?
       @journey_status = true
     end
 
@@ -33,7 +35,10 @@ class Oystercard
     private
 
     def exceeds_max?(value)
-        @balance + value >= LIMIT
+        @balance + value >= MAX_LIMIT
     end
 
+    def min_amount?
+        @balance <= MIN_LIMIT
+    end
 end
