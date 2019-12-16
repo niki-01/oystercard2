@@ -1,6 +1,6 @@
 class Oystercard
 
-    attr_reader :balance
+    attr_reader :balance, :entry_station
 
     MAX_LIMIT = 90
     MIN_LIMIT = 1
@@ -9,6 +9,7 @@ class Oystercard
     def initialize(balance = 0)
         @balance = balance
         @journey_status = false
+        @entry_station = nil
     end
 
     def top_up(value)
@@ -20,8 +21,9 @@ class Oystercard
       @journey_status
     end
 
-    def touch_in
+    def touch_in(location)
       fail "Not enough credit" if min_amount?
+      @entry_station = location
       @journey_status = true
     end
 
