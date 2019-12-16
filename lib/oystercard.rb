@@ -26,7 +26,7 @@ class Oystercard
     end
 
     def touch_out
-      deduct
+      deduct(MIN_FARE)
       @journey_status = false
     end
 
@@ -40,7 +40,7 @@ class Oystercard
       @balance <= MIN_LIMIT
     end
 
-    def deduct
-      @balance -= MIN_FARE
+    def deduct(value)
+      @balance -= value
     end
 end
