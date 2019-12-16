@@ -1,5 +1,5 @@
 class Oystercard
-    
+
     attr_reader :balance
 
     LIMIT = 90
@@ -11,6 +11,10 @@ class Oystercard
     def top_up(value)
         fail "Error: Maximum limit of #{LIMIT.to_s} reached" if exceeds_max?(value)
         @balance += value
+    end
+
+    def deduct(value)
+      @balance -= value
     end
 
     private
