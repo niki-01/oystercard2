@@ -14,7 +14,7 @@ describe Oystercard do
         end
 
         it 'raises an error if the action would take the card beyond the limit' do
-            expect{ subject.top_up 100 }.to raise_error 'Error: Maximum limit reached'
+            expect{ subject.top_up 100 }.to raise_error "Error: Maximum limit of #{Oystercard::LIMIT.to_s} reached"
         end
     end
 end
