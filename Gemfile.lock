@@ -20,7 +20,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rspec!
+  rspec
 
 RUBY VERSION
    ruby 2.6.3p62
