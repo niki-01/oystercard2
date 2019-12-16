@@ -62,6 +62,13 @@ describe Oystercard do
         subject.touch_in(old_street)
         expect{ subject.touch_out }.to change{ subject.balance }.by (-Oystercard::MIN_FARE)
       end
+
+      it 'after touching out, entry station returns nil' do
+        subject.top_up(10)  
+        old_street = double("Old Street")
+        subject.touch_in(old_street)
+        expect{ subject.touch_out }.to change{ subject.entry_station }.to nil
+      end
     end
 
     describe 'minimum value' do

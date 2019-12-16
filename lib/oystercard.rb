@@ -30,6 +30,7 @@ class Oystercard
     def touch_out
       deduct(MIN_FARE)
       @journey_status = false
+      @entry_station = nil
     end
 
     private
