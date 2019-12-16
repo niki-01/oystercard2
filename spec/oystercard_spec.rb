@@ -18,13 +18,6 @@ describe Oystercard do
         end
     end
 
-    # describe '#deduct' do
-    #   it 'it reduces the card balance by specified amount' do
-    #     subject.top_up(40)
-    #     expect{ subject.deduct(20) }.to change{ subject.balance }.by (-20)
-    #   end
-    # end
-
     describe 'journey status' do
       it 'shows if card is in journey' do
         expect(subject.in_journey?).to eq false
@@ -48,26 +41,50 @@ describe Oystercard do
     end
 
     describe '#touch_out' do
-      it 'shows card is not in journey after touching in then touching out again' do
+
+      before(:each) do
         subject.top_up(10)
+      end
+
+      it 'shows card is not in journey after touching in then touching out again' do
         old_street = double("Old Street")
+        kings_cross = double("kings_cross")
         subject.touch_in(old_street)
-        subject.touch_out
+        subject.touch_out(kings_cross)
         expect(subject.in_journey?).to eq false
       end
 
       it 'reduces balance by minimum fare on touch out' do
-        subject.top_up(10)
         old_street = double("Old Street")
+        kings_cross = double("kings_cross")
         subject.touch_in(old_street)
-        expect{ subject.touch_out }.to change{ subject.balance }.by (-Oystercard::MIN_FARE)
+        expect{ subject.touch_out(kings_cross) }.to change{ subject.balance }.by (-Oystercard::MIN_FARE)
       end
 
       it 'after touching out, entry station returns nil' do
-        subject.top_up(10)  
         old_street = double("Old Street")
+        kings_cross = double("kings_cross")
         subject.touch_in(old_street)
-        expect{ subject.touch_out }.to change{ subject.entry_station }.to nil
+        expect{ subject.touch_out(kings_cross) }.to change{ subject.entry_station }.to nil
+      end
+
+      it 'after touching out, exit station is set' do
+        old_street = double("Old Street")
+        kings_cross = double("kings_cross")
+        subject.touch_in(old_street)
+        expect{ subject.touch_out(kings_cross) }.to change{ subject.exit_station }.to kings_cross
+      end
+
+      it 'journeys is empty by default' do
+        expect(subject.journeys).to eq []
+      end
+
+      it 'after touching out, journey is recorded' do
+        old_street = double("Old Street")
+        kings_cross = double("kings_cross")
+        subject.touch_in(old_street)
+        subject.touch_out(kings_cross)
+        expect(subject.journey_number(1)).to eq ({:touch_in => old_street, :touch_out => kings_cross})
       end
     end
 
