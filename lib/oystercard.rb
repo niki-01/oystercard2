@@ -10,7 +10,7 @@ class Oystercard
     @balance = balance
     @entry_station = nil
     @exit_station = nil
-    @journeys = []
+    @journeys = [] # Journey class
   end
 
   def top_up(value)
@@ -30,7 +30,6 @@ class Oystercard
   def touch_out(location)
     @exit_station = location
     record_journey # Journey class
-    @entry_station = nil
     deduct(MIN_FARE)
   end
 
@@ -54,6 +53,8 @@ class Oystercard
 
   # Journey class
   def record_journey
-    @journeys << { :touch_in => @entry_station, :touch_out => @exit_station }
+    journey = { :touch_in => @entry_station, :touch_out => @exit_station }
+    @journeys << journey
+    @entry_station = nil
   end
 end

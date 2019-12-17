@@ -70,7 +70,7 @@ describe Oystercard do
 
     it 'after touching out, journey is recorded' do
       subject.touch_out(kings_cross)
-      expect(subject.journey_number(1)).to eq ({:touch_in => old_street, :touch_out => kings_cross})
+      expect(subject.journey_number(1)).to eq({:touch_in => old_street, :touch_out => kings_cross})
     end
   end
 
