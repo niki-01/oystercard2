@@ -18,13 +18,13 @@ class Oystercard
     @balance += value
   end
 
-  def touch_in(location)
-    @journey.starts(location)
+  def touch_in(station)
+    @journey.starts(station)
     fail "Not enough credit" if min_amount? 
   end
 
-  def touch_out(location)
-    @journey.ends(location)
+  def touch_out(station)
+    @journey.ends(station)
     deduct(MIN_FARE)
   end
 
@@ -41,5 +41,4 @@ class Oystercard
   def deduct(value)
     @balance -= value
   end
-  
 end

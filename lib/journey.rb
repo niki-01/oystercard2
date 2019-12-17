@@ -7,18 +7,19 @@ class Journey
         @entry_station = nil
         @exit_station = nil
         @journeys = []
+        @station = Station
     end
 
     def in_journey? 
         !!entry_station
     end
 
-    def starts(location)
-        @entry_station = location
+    def starts(station)
+        @entry_station = station
     end
 
-    def ends(location)
-        @exit_station = location
+    def ends(station)
+        @exit_station = station
         record_journey 
     end
  
@@ -35,7 +36,3 @@ class Journey
       end
 
 end
-
-# Journey class: start a journey, finish, calculate fare, return if journey is complete
-# We want to put a penalty fare (.deduct penalty fare of 6) if user touch_out && touch_in == nil
-# Repeat if there was a touch_in but no touch_out

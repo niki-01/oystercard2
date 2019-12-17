@@ -18,7 +18,7 @@ describe Journey do
         it 'shows card is in journey after touching in' do
             subject.starts(old_street)
             expect(subject.in_journey?).to eq true
-          end
+        end
         
         it 'returns entry station after touch in' do
             subject.starts(old_street)
@@ -41,7 +41,7 @@ describe Journey do
         it 'after touching out, journey is recorded' do
             subject.ends(kings_cross)
             expect(subject.journey_number(1)).to eq({:touch_in => old_street, :touch_out => kings_cross})
-          end
+        end
 
         it 'after touching out, entry station returns nil' do
             expect{ subject.ends(kings_cross) }.to change{ subject.entry_station }.to nil
