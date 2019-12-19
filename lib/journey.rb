@@ -30,11 +30,7 @@ class Journey
     end
 
     def fare
-        if (@entry_station == nil) || (@exit_station == nil)
-          PENALTY_FARE
-        else 
-          MIN_FARE
-        end
+        (@entry_station == nil) || (@exit_station == nil) ? PENALTY_FARE : MIN_FARE
     end
 
     def reset
