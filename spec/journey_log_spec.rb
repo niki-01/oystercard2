@@ -24,9 +24,6 @@ describe JourneyLog do
             expect(subject.entry_station).to eq old_street
         end
     end
-
-
-
 end
 
 # finish
