@@ -2,16 +2,12 @@ require 'journey_log'
 
 describe JourneyLog do
     
+    subject { JourneyLog.new(Journey)}
+
     describe "#initialize" do
-        it 'initializes with a journey object' do
-            indie = double("indie")
-            subject = JourneyLog.new(indie)
-            expect(subject.journey_object).to eq indie
-        end
 
         it 'if journey is nil, initializes with Journey.new' do
-            subject = JourneyLog.new(nil)
-            expect(subject.journey_object).to be_an_instance_of(Journey)
+            expect(subject.journey_class).is_a?(Journey)
         end
     end
 
@@ -19,13 +15,18 @@ describe JourneyLog do
         let(:old_street) {"Old Street"}
 
         it 'starts a new journey with an entry station' do
-            subject = JourneyLog.new(nil)
+            expect(subject.instance_variable_get(:@current_journey)).to receive(:starts).with(old_street)
             subject.start(old_street)
-            expect(subject.entry_station).to eq old_street
+        end
+    end
+
+    describe "#finish" do
+        let(:kings_cross) {"Kings Cross"}
+
+        it "adds an exit station to the current_journey" do
+            expect(subject.instance_variable_get(:@current_journey)).to receive(:ends).with(kings_cross)
+            subject.finish(kings_cross)
         end
     end
 end
 
-# finish
-# history
-# private method #current_journey
