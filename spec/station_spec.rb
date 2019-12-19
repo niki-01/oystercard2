@@ -1,7 +1,7 @@
 require 'station'
 
 describe Station do
-    describe "#initializes" do
+    describe "#initialize" do
         let(:name) {"Old Street"}
         let(:zone) {1}
         let(:subject) {Station.new(name, zone)}
