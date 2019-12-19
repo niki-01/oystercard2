@@ -7,20 +7,9 @@ describe Journey do
             expect(subject.history).to eq []
         end
     end
-    
-    describe '#status?' do
-        it 'shows if card is in journey' do
-            expect(subject.status?).to eq false
-        end
-    end
 
     describe '#starts' do
         let(:old_street) {"Old Street"}
-
-        it 'shows card is in journey after touching in' do
-            subject.starts(old_street)
-            expect(subject.status?).to eq true
-        end
         
         it 'returns entry station after touch in' do
             subject.starts(old_street)
@@ -32,11 +21,6 @@ describe Journey do
         let(:old_street) {"Old Street"}
         let(:kings_cross) {"Kings Cross"}
         before(:each) {subject.starts(old_street)}
-    
-        it 'shows card is not in journey after touching in then touching out again' do
-            subject.ends(kings_cross)
-            expect(subject.status?).to eq true
-        end
 
         it 'after touching out, journey is recorded' do
             subject.ends(kings_cross)
