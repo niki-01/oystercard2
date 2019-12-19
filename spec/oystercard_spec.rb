@@ -19,7 +19,7 @@ describe Oystercard do
   end
 
   describe '#touch_out' do
-    let(:old_street) {"Old Street"}
+    let(:old_street) { "Old Street" }
     let(:kings_cross) {"Kings Cross"}
     
     before(:each) do 
@@ -28,7 +28,7 @@ describe Oystercard do
     end
     
     it 'reduces balance by minimum fare on touch out' do
-      expect{ subject.touch_out(kings_cross) }.to change{ subject.balance }.by (-Oystercard::MIN_FARE)
+      expect{ subject.touch_out(kings_cross) }.to change{ subject.balance }.by (-Journey::MIN_FARE)
     end
 
   end
