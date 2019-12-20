@@ -20,7 +20,7 @@ require_relative 'journey'
     end
 
     def immute
-        @history.clone
+        @history.clone # research .clone method
     end
 
     private
