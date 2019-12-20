@@ -16,6 +16,11 @@ require_relative 'journey'
 
     def finish(exit_station)
         @current_journey.ends(exit_station)
+        reset
+    end
+
+    def immute
+        @history.clone
     end
 
     private
@@ -26,6 +31,7 @@ require_relative 'journey'
 
     def reset
        @history << @current_journey
+       immute
        @current_journey = Journey.new
     end
     

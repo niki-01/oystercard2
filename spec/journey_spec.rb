@@ -2,12 +2,6 @@ require 'journey'
 
 describe Journey do
 
-    describe '#initialize' do
-        it 'journeys array is empty by default' do
-            expect(subject.history).to eq []
-        end
-    end
-
     describe '#starts' do
         let(:old_street) {"Old Street"}
         
@@ -22,10 +16,6 @@ describe Journey do
         let(:kings_cross) {"Kings Cross"}
         before(:each) {subject.starts(old_street)}
 
-        it 'after touching out, journey is recorded' do
-            subject.ends(kings_cross)
-            expect(subject.history[0]).to eq({:touch_in => old_street, :touch_out => kings_cross})
-        end
 
         it 'after touching out, exit station is set' do
             expect{ subject.ends(kings_cross) }.to change{ subject.exit_station }.to kings_cross
